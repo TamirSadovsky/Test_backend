@@ -18,7 +18,6 @@ google_credentials_json = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_JSON")
 google_credentials_dict = json.loads(google_credentials_json)
 # Create a storage client using the parsed service account info
 storage_client = storage.Client.from_service_account_info(google_credentials_dict)
-print("Hello")
 # Now you can use the storage_client to interact with Google Cloud Storage
 
 
@@ -34,8 +33,8 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 jwt = JWTManager(app)
 
 app.config['SECRET_KEY'] = 'farmers2u'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flaskdb.db'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://yujjnvtocxfkct:82041f972e2cf06b216939a48e725dee4a6fa933a317645e1dfcd6cb071dd898@ec2-35-169-11-108.compute-1.amazonaws.com:5432/dbh0j7ct23pmpf'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flaskdb.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://yujjnvtocxfkct:82041f972e2cf06b216939a48e725dee4a6fa933a317645e1dfcd6cb071dd898@ec2-35-169-11-108.compute-1.amazonaws.com:5432/dbh0j7ct23pmpf'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
