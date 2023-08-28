@@ -150,21 +150,6 @@ class Post(db.Model):
         else:
             return posted_datetime.strftime('%d/%m/%Y')
 
-with app.app_context():
-   db.create_all()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def allowed_file(filename):
