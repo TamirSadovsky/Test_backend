@@ -70,7 +70,7 @@ def get_uuid():
 
 class User(db.Model):
     __tablename__ = "users"
-    id = db.Column(db.String(11), primary_key=True, unique=True, default=get_uuid)
+    id = db.Column(db.String(40), primary_key=True, unique=True, default=get_uuid)
     # email = db.Column(db.String(150), nullable=True, unique=True)
     email = db.Column(db.String(150), nullable=True)
     google_profile_picture = db.Column(db.String(150))
