@@ -1,6 +1,5 @@
 from flask import jsonify, request, Blueprint
-from app import app
-from models import Post, User, db
+from app import app, Post, User, db
 import datetime
 import os
 from werkzeug.utils import secure_filename

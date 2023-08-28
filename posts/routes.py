@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 import datetime
-from models import User, Post, db
+from app import User, Post, db
 import os
 import pytz
 from werkzeug.utils import secure_filename
