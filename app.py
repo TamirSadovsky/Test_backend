@@ -34,13 +34,13 @@ jwt = JWTManager(app)
 
 app.config['SECRET_KEY'] = 'farmers2u'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flaskdb.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://yujjnvtocxfkct:82041f972e2cf06b216939a48e725dee4a6fa933a317645e1dfcd6cb071dd898@ec2-35-169-11-108.compute-1.amazonaws.com:5432/dbh0j7ct23pmpf'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://yujjnvtocxfkct:82041f972e2cf06b216939a48e725dee4a6fa933a317645e1dfcd6cb071dd898@ec2-35-169-11-108.compute-1.amazonaws.com:5432/dbh0j7ct23pmpf'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
   
 CORS(app, supports_credentials=True)
-
+print(app.config['SQLALCHEMY_DATABASE_URI'])
 db = SQLAlchemy(app)
 
 
