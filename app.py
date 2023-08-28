@@ -84,7 +84,7 @@ class User(db.Model):
     products_pictures = db.Column(db.String(1000), nullable=True)    
     farm_pictures = db.Column(db.String(1000), nullable=True)     
     farm_name = db.Column(db.String(150), nullable=True, unique=False)  # Set nullable=True for the name column
-    about = db.Column(db.String(300), default='')
+    about = db.Column(db.String(4000), default='')
     phone_number_official = db.Column(db.String(20), default='')
     phone_number_whatsapp = db.Column(db.String(20), default='')
     phone_number_telegram = db.Column(db.String(20), default='')
@@ -92,9 +92,9 @@ class User(db.Model):
     farmer_name = db.Column(db.String(150))
     #is_organic = db.Column(db.String(10))
     #is_vegan = db.Column(db.String(10))
-    delivery_details = db.Column(db.String(150))
-    products = db.Column(db.String(300))
-    types_of_products = db.Column(db.String(200))
+    delivery_details = db.Column(db.String(1000))
+    products = db.Column(db.String(3000))
+    types_of_products = db.Column(db.String(400))
     farm_site = db.Column(db.String(150), default='')
     facebook = db.Column(db.String(150), default='')
     instagram = db.Column(db.String(150), default='')
@@ -102,12 +102,12 @@ class User(db.Model):
 
 class Post(db.Model):
     __tablename__ = "posts"
-    id = db.Column(db.String(11), primary_key=True, unique=True, default=get_uuid)  # unique identifier of the post
+    id = db.Column(db.String(40), primary_key=True, unique=True, default=get_uuid)  # unique identifier of the post
     farmName = db.Column(db.String(150), nullable=False)   
     email = db.Column(db.String(150), nullable=False)                        
     profilePicture = db.Column(db.String(255))                                      # The logo of the farm
     photo = db.Column(db.String(255))                                               # The picture on the post
-    desc = db.Column(db.String(1000))                                               # The text of the post
+    desc = db.Column(db.String(3000))                                               # The text of the post
     date = db.Column(db.Date)                                                       # The date it was posted month/day/year              
     latitude = db.Column(db.Float)                                                  # Latitude for the distance function
     longitude = db.Column(db.Float)                                                 # Longitude for the distance function    
