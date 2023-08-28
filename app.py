@@ -1,14 +1,13 @@
 from flask import Flask, request, jsonify, session
 import os
-from flask_bcrypt import Bcrypt #pip install Flask-Bcrypt = https://pypi.org/project/Flask-Bcrypt/
 from datetime import datetime, timedelta, timezone
-from flask_cors import CORS, cross_origin #ModuleNotFoundError: No module named 'flask_cors' = pip install Flask-Cors
+from flask_cors import CORS #ModuleNotFoundError: No module named 'flask_cors' = pip install Flask-Cors
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, unset_jwt_cookies, jwt_required, JWTManager #pip install Flask-JWT-Extended
 from models import db, User, Post
-from werkzeug.utils import secure_filename #pip install Werkzeug
 import json
 from google.cloud import storage
 from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy 
 
 
 # Load environment variables from .env
@@ -36,17 +35,16 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 jwt = JWTManager(app)
 
 app.config['SECRET_KEY'] = 'farmers2u'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flaskdb.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://yujjnvtocxfkct:82041f972e2cf06b216939a48e725dee4a6fa933a317645e1dfcd6cb071dd898@ec2-35-169-11-108.compute-1.amazonaws.com:5432/dbh0j7ct23pmpf'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
- 
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-SQLALCHEMY_ECHO = True
+
   
-bcrypt = Bcrypt(app) 
 CORS(app, supports_credentials=True)
+
 db.init_app(app)
-  
+
 with app.app_context():
    db.create_all()
 
