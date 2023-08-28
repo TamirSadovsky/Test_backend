@@ -37,6 +37,8 @@ jwt = JWTManager(app)
 
 app.config['SECRET_KEY'] = 'farmers2u'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://yujjnvtocxfkct:82041f972e2cf06b216939a48e725dee4a6fa933a317645e1dfcd6cb071dd898@ec2-35-169-11-108.compute-1.amazonaws.com:5432/dbh0j7ct23pmpf'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = True
  
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_ECHO = True
@@ -76,9 +78,7 @@ app.register_blueprint(business_blueprint)
 from farmFilt import farmfilter_blueprint
 app.register_blueprint(farmfilter_blueprint)
 
-UPLOAD_FOLDER = os.path.join('..', 'frontend', 'public', 'Form_images','Logo_image')
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
   
@@ -145,34 +145,6 @@ def create_token():
         "access_token": access_token
     })
  
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    # check if the post request has the file part
-    print(request.files)
-    if 'files[]' not in request.files:
-        resp = jsonify({
-            "message": 'No file part in the request',
-            "status": 'failed'
-        })
-        resp.status_code = 400
-        return resp
-  
-    files = request.files.getlist('files[]')
-      
-    errors = {}
-    success = False
-      
-    for file in files:      
-        if file and allowed_file(file.filename):
-            #filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-            success = True
-        else:
-            resp = jsonify({
-                "message": 'File type is not allowed',
-                "status": 'failed'
-            })
-            return resp
          
     if success and errors:
         errors['message'] = 'File(s) successfully uploaded'
