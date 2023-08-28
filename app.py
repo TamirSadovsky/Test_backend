@@ -619,6 +619,9 @@ app.register_blueprint(userposts_blueprint)
 from posts.updatePost import updatePost_blueprint
 app.register_blueprint(updatePost_blueprint)
 
+from posts.delete_post import deletepost_blueprint
+app.register_blueprint(deletepost_blueprint)
+
 from busCard import business_blueprint
 app.register_blueprint(business_blueprint)
 
